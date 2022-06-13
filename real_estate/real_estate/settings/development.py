@@ -1,4 +1,4 @@
-from .base import*
+from .base import *
 
 DATABASES = {
     'default': {
@@ -7,6 +7,6 @@ DATABASES = {
         'USER': env('POSTGRES_USER'),
         'PASSWORD': env('POSTGRES_PASSWORD'),
         'HOST': env('PG_HOST'),
-        'POST': env('PG_PORT'),   
+        'PORT': env('PG_PORT'),   
     }
 }
