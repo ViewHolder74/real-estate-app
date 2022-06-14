@@ -6,9 +6,9 @@ from django.urls import path, include
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('supersecret/', admin.site.urls),
+    path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-admin.site.site_header = 'Real Estste Admin'
+admin.site.site_header = 'Real Estate Admin'
 admin.site.title = 'Real Estate Admin Portal'
 admin.site.index_title = 'Welcome to the Real Estate Portal'
