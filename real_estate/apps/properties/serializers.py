@@ -26,7 +26,7 @@ class PropertySerializer(serializers.ModelSerializer):
             "tax",
             "final_property_price",
             "plot_area",
-            "plot_floors",
+            "total_floors",
             "bedrooms",
             "bathrooms",
             "advert_type",

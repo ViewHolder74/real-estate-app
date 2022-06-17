@@ -39,7 +39,7 @@ class Property(TimeStampedUUIDModel):
         COMMERCIAL = "Commercial", _("Commercial")
         OTHER = "Other", _("Other")
         
-    user = models.ForeignKey(User, verbose_name=_("Agent, seller or Buyer"),related_name="agent_buyer",on_delete=models.DO_NOTHING ),
+    user = models.ForeignKey(User, verbose_name=_("Agent, seller or Buyer"),related_name="agent_buyer",on_delete=models.DO_NOTHING )
     title = models.CharField(verbose_name=_("Property Title"), max_length=250,)
     slug = AutoSlugField(populate_from="title", unique=True, always_update=True)
     ref_code = models.CharField(verbose_name=_("Property Reference Code"), max_length=255, unique=True, blank=True,)
@@ -51,17 +51,17 @@ class Property(TimeStampedUUIDModel):
     property_number = models.IntegerField(verbose_name=_("Property Number"), validators=[MinValueValidator(1)], default=112)
     price = models.DecimalField(verbose_name=_("Price"), max_digits=8, decimal_places=2, default=0.0)
     tax = models.DecimalField(verbose_name=_("Propert Tax"), max_digits=6, decimal_places=2, default=0.15, help_text="15% property tax charged")
-    plot_area=models.DecimalField(verbose_name=_("Plot Area(m^2)"), max_digits=8, decimal_places=2, default=0.0)
+    plot_area=models.DecimalField(verbose_name=_("Plot Area(metres square feet)"), max_digits=8, decimal_places=2, default=0.0)
     total_floors = models.IntegerField(verbose_name=_("Number of Floors"),default=0)
     bedrooms = models.IntegerField(verbose_name=_("Bedrooms"), default=1, )
     bathrooms = models.DecimalField(verbose_name=_("Bathrooms"),max_digits=4, decimal_places=2, default=1.0  )
     advert_type=models.CharField(verbose_name=_("Advert Type"), max_length=50, choices=AdvertType.choices, default=AdvertType.FOR_RENT )
     property_type =models.CharField(verbose_name=_("Property Type"), max_length=50, choices=PropertyType.choices, default=PropertyType.OTHER)
     cover_photo = models.ImageField(verbose_name=_("Main Photo"), default="/house_sample.jpg", null=True, blank=True)
-    photo1 = models.ImageField(default="/interior_sample.jpg", null=True, blank=True,)
-    photo2 = models.ImageField(default="/interior_sample.jpg", null=True, blank=True,)
-    photo3 = models.ImageField(default="/interior_sample.jpg", null=True, blank=True,)
-    photo4 = models.ImageField(default="/interior_sample.jpg", null=True, blank=True,)
+    photo1 = models.ImageField(default="/interior1_sample.jpg", null=True, blank=True,)
+    photo2 = models.ImageField(default="/interior2_sample.jpg", null=True, blank=True,)
+    photo3 = models.ImageField(default="/interior3_sample.jpg", null=True, blank=True,)
+    photo4 = models.ImageField(default="/interior4_sample.jpg", null=True, blank=True,)
     published_status = models.BooleanField(verbose_name=_("Published Status"), default=False)
     views = models.IntegerField(verbose_name=_("Total Views"), default=0) 
     objects = models.Manager()
@@ -76,7 +76,7 @@ class Property(TimeStampedUUIDModel):
     
     def save(self, *args, **kwargs):
         self.title = str.title(self.title)
-        self.description = str.description(self.description)
+        self.description = str.capitalize(self.description)
         self.ref_code = "".join(random.choices(string.ascii_uppercase + string.digits, k=10))
         super(Property, self).save(*args, **kwargs) 
     
