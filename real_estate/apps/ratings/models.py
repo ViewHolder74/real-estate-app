@@ -13,8 +13,8 @@ class Rating(TimeStampedUUIDModel):
         RATING_4 = 4, _('Very Good')
         RATING_5 = 5, _('Excellent')
         
-    rater = models.ForeignKey(AUTH_USER_MODEL, verbose_name=_('User providing the rating'), related_name='agent_review', on_delete=models.SET_NULL, null=True)
-    agent = models.ForeignKey(Profile, verbose_name=_('Agent being rated'), on_delete=models.SET_NULL, null=True)
+    rater = models.ForeignKey(AUTH_USER_MODEL, verbose_name=_('User providing the rating'),  on_delete=models.SET_NULL, null=True)
+    agent = models.ForeignKey(Profile, verbose_name=_('Agent being rated'),related_name='agent_review', on_delete=models.SET_NULL, null=True)
     rating = models.IntegerField(verbose_name=_('Rating'), choices=Range.choices, help_text='1=Poor, 2=Fair, 3=Good, 4=Very Good, 5=Excellent', default=0)
     comment = models.TextField(verbose_name=_('Comment'))
     
